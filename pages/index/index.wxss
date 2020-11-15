@@ -27,5 +27,6 @@
   text-align: center;
   font-size: 28rpx;
   border: 1rpx solid #333;
-  border-radius: 10rpx
+  border-radius: 10rpx;
+  padding:5px 10px;
 }
