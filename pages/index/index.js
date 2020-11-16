@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    msg:"初始化测试数据"
+    msg:"初始化测试数据",
+    userInfo:{}, //存放用户的基本信息
   },
 
   handleParent() {
@@ -17,7 +18,7 @@ Page({
 
   //跳转至logs页面的方法
   toLogs() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '/pages/logs/logs',
     })
   },
@@ -27,43 +28,65 @@ Page({
    */
   onLoad: function (options) {
     console.log('onload')
+    // debugger;
 
     // 修改msg 的状态数据,this代表当前页面的实例对象
-    console.log(this.data.msg)
-    setTimeout(() => {
+    // console.log(this.data.msg)
+    // setTimeout(() => {
+    //   this.setData({
+    //     msg: "修改之后的数据"
+    //   })
+    //   console.log(this.data.msg)
+    // },2000)
+
+    // 授权后,获取用户信息
+    wx.getUserInfo({
+      success:(res) => {
+        console.log(res);
+      },
+      faile: (err) => {
+        console.log(err);
+      }
+    })
+  },
+
+  //获取用户信息的回调
+  handleGetUserInfo(res) {
+    console.log(res)
+    if(res.detail.userInfo) {//允许
+      //修改userInfo的状态数据
       this.setData({
-        msg: "修改之后的数据"
+        userInfo: res.detail.userInfo
       })
-      console.log(this.data.msg)
-    },2000)
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log('onReady')
   },
 
   /**
-   * 生命周期函数--监听页面显示
+   * 生命周期函数--监听页面显示 执行多次
    */
   onShow: function () {
-
+    console.log('onShow')
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    console.log('onHide')
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    console.log('onUnload')
   },
 
   /**
